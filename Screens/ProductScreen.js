@@ -8,7 +8,7 @@ import List from "../Components/List/Index"
 import { Entypo } from '@expo/vector-icons'; 
 
 
-const ProductScreen=({category={id:1,category:"Cat 1"}, handleCategory})=>{
+const ProductScreen=({category={id:1,category:"Cat 1"}, navigation})=>{
 const[input, setInput]=useState("")
 const handleErase=()=>{setInput("")}
 const [productsFiltered,setProductsFiltered]=useState([])
@@ -25,6 +25,14 @@ useEffect (()=>{
     const initialProduct=PRODUCTS.filter(product=>product.category===category.id)
     setInitialProducts(initialProduct)
 },[])  
+
+const handleDetailProduct=()=>{
+    navigation.navigate("Detail")
+}
+
+const handleBack=()=>{
+    navigation.goBack()
+}
 
 return (
     <>
@@ -43,8 +51,8 @@ return (
      </TouchableOpacity>
      </Searcher>
      <View style={styles.listContainer}>
-         <List data={productsFiltered} itemType={"Product"} onPress={()=>{}}/>
-         <Button title="Go back" onPress={()=>handleCategory(null)}/>
+         <List data={productsFiltered} itemType={"Product"} onPress={handleDetailProduct}/>
+         <Button title="Go back" onPress={handleBack}/>
       </View>
       </View>
 

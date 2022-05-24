@@ -6,8 +6,9 @@ import { CATEGORIES } from "../Data/categories";
 import List from "../Components/List/Index";
 import React, { useState,useEffect } from "react";
 import { Entypo } from '@expo/vector-icons'; 
+import MainNavigation from "../Navigation";
 
-const CategoriesScreen=({handleCategory})=>{
+const CategoriesScreen=({navigation})=>{
 const[input, setInput]=useState("")
 const handleErase=()=>{setInput("")}
 const [categoriesFiltered,setCategoriesFiltered]=useState(CATEGORIES)
@@ -20,7 +21,7 @@ useEffect (()=>{
 
 
 const handleSelectedCategory=(category)=>{
-    handleCategory(category)
+ navigation.push ("Products")
 }
 
 
