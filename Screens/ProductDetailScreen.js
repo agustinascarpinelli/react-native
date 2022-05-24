@@ -26,7 +26,7 @@ const ProductDetailScreen=({
             style={styles.image}
             resizeMode="cover"
             />
-            <Text>{product.description}</Text>
+            <Text style={styles.prodDescription}>{product.description}</Text>
             <Text>{product.price}</Text>
             <Button onPress={handleBack} title='Volver atras'/>
         </View>
@@ -44,5 +44,9 @@ const styles=StyleSheet.create({
     container:{
         flex:1,
         flexDirection:"column",
-    }
+    },
+   prodDescription:{
+       fontFamily:'OpenSans',
+   }
+   
 })
