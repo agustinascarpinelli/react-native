@@ -5,7 +5,7 @@ import CategoriesScreen from './Screens/CategoriesScreen';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useFonts} from 'expo-font';
-import MainNavigation from './Navigation';
+import MainNavigator from './Navigation';
 
 
 
@@ -20,7 +20,7 @@ export default function App(){
   
       return (
         <SafeAreaView style={{ flex: 1 }}>
-          < MainNavigation/>
+          <MainNavigator/>
         </SafeAreaView>
       )
 }

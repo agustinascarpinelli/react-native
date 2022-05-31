@@ -34,7 +34,7 @@ export const PRODUCTS =[
     {
         id:5,
         category:2,
-        description:"Product 1",
+        description:"Product 2",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -42,7 +42,7 @@ export const PRODUCTS =[
     {
         id:6,
         category:2,
-        description:"Product 1",
+        description:"Product 2",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -50,7 +50,7 @@ export const PRODUCTS =[
     {
         id:7,
         category:2,
-        description:"Product 1",
+        description:"Product 2",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -58,7 +58,7 @@ export const PRODUCTS =[
     {
         id:8,
         category:2,
-        description:"Product 1",
+        description:"Product 2",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -66,7 +66,7 @@ export const PRODUCTS =[
     {
         id:9,
         category:3,
-        description:"Product 1",
+        description:"Product 3",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -74,7 +74,7 @@ export const PRODUCTS =[
     {
         id:10,
         category:3,
-        description:"Product 1",
+        description:"Product 3",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -82,7 +82,7 @@ export const PRODUCTS =[
     {
         id:11,
         category:3,
-        description:"Product 1",
+        description:"Product 3",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -90,7 +90,7 @@ export const PRODUCTS =[
     {
         id:12,
         category:3,
-        description:"Product 1",
+        description:"Product 3",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -98,7 +98,7 @@ export const PRODUCTS =[
     {
         id:13,
         category:4,
-        description:"Product 1",
+        description:"Product 4",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -106,7 +106,7 @@ export const PRODUCTS =[
     {
         id:14,
         category:4,
-        description:"Product 1",
+        description:"Product 4",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -114,7 +114,7 @@ export const PRODUCTS =[
     {
         id:15,
         category:4,
-        description:"Product 1",
+        description:"Product 4",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 
@@ -122,7 +122,7 @@ export const PRODUCTS =[
     {
         id:16,
         category:4,
-        description:"Product 1",
+        description:"Product 4",
         price:1,
         image:"https://dummyimage.com/250/ffffff/000000",
 

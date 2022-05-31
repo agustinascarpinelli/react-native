@@ -1,5 +1,5 @@
 import { colors } from "../Styles/colors"
-import { StyleSheet, View,TextInput,TouchableOpacity,Button} from "react-native"
+import { StyleSheet, useWindowDimensions, View,TextInput,TouchableOpacity,Button, KeyboardAvoidingView, TouchableWithoutFeedback,Platform,Keyboard} from "react-native"
 import Searcher from "../Components/Searcher"
 import Header from "../Components/Header"
 import { PRODUCTS } from "../Data/product"
@@ -8,11 +8,14 @@ import List from "../Components/List/Index"
 import { Entypo } from '@expo/vector-icons'; 
 
 
-const ProductScreen=({category={id:1,category:"Cat 1"}, navigation})=>{
+const ProductScreen=({route, navigation})=>{
 const[input, setInput]=useState("")
 const handleErase=()=>{setInput("")}
 const [productsFiltered,setProductsFiltered]=useState([])
 const [initialProducts, setInitialProducts]=useState([])
+const {width,height}=useWindowDimensions()
+const [orientation,setOrientation]=useState("portrait")
+const {categoryID,categoryTitle}=route.params
 
 useEffect (()=>{
     if (initialProducts.length!==0){
@@ -22,12 +25,18 @@ useEffect (()=>{
     }}, [input,initialProducts])
 
 useEffect (()=>{
-    const initialProduct=PRODUCTS.filter(product=>product.category===category.id)
+    const initialProduct=PRODUCTS.filter(product=>product.category===categoryID)
     setInitialProducts(initialProduct)
-},[])  
+},[categoryID])  
+useEffect (()=>{
+    setOrientation(height>width ? "portrait" : "landscape" )
+},[height,width])
 
-const handleDetailProduct=()=>{
-    navigation.navigate("Detail")
+const handleDetailProduct=(product)=>{
+    navigation.navigate("Detail",{
+        productID:product.id,
+        productTitle:product.description,
+    })
 }
 
 const handleBack=()=>{
@@ -35,8 +44,12 @@ const handleBack=()=>{
 }
 
 return (
-    <>
-    <Header title={category.category}/>
+    <KeyboardAvoidingView 
+    behavior={Platform.OS==='ios' ? "padding" :"height"}
+    style={styles.keyboardAvoid}
+    keyboardVerticalOffset={10}>
+    <Header title={categoryTitle}/>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
     <Searcher >
     <TextInput
@@ -52,16 +65,19 @@ return (
      </Searcher>
      <View style={styles.listContainer}>
          <List data={productsFiltered} itemType={"Product"} onPress={handleDetailProduct}/>
-         <Button title="Go back" onPress={handleBack}/>
+         <Button title="Go back" onPress={handleBack} />
       </View>
       </View>
-
-    </>
+      </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
 )
 }
 export default ProductScreen;
 
 const styles=StyleSheet.create({
+    keyboardAvoid: {
+        flex: 1,
+    },
     container:{
         flex:1,
         width:'100%',
@@ -69,6 +85,7 @@ const styles=StyleSheet.create({
         flexDirection:'column',
 
     },
+
     input:{
         width:'80%',
         padding:10,
@@ -80,5 +97,8 @@ const styles=StyleSheet.create({
     },
     listContainer:{
         flex:1,
-    }
+        marginBottom:10,
+       
+    },
+
 })
