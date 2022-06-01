@@ -1,7 +1,7 @@
 import { StyleSheet, Text,View,useWindowDimensions, Image, Button, KeyboardAvoidingView, Keyboard,Platform, TouchableWithoutFeedback } from "react-native";
 import React, {useEffect, useState} from "react";
 import Header from "../Components/Header";
-import { PRODUCTS } from "../Data/product";
+import {useSelector } from "react-redux";
 
 const ProductDetailScreen=({
     route,
@@ -9,18 +9,14 @@ const ProductDetailScreen=({
 
 })=>{
 
-    const {width,height}=useWindowDimensions()
-    const {productID,productTitle} =route.params;
-    const [product, setProduct]=useState(null)
-    useEffect(()=>{
-        const productSelected=PRODUCTS.find(prod=>prod.id===productID)
-        setProduct(productSelected)
-    }, [productID])
+    const {productTitle} =route.params;
+    const {productSelected}=useSelector(state=>state.products.value)
+   
     const handleBack=()=>{
         navigation.goBack()
     }
     return(
-        product && (
+        productSelected && (
         <KeyboardAvoidingView 
         behavior={Platform.OS==='ios' ? "padding" : "height"}
         style={styles.keyboardAvoid}
@@ -30,12 +26,12 @@ const ProductDetailScreen=({
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
             <Image
-            source={{uri:product?.image}}
+            source={{uri:productSelected.image}}
             style={styles.image}
             resizeMode="cover"
             />
-            <Text style={styles.prodDescription}>{product?.description}</Text>
-            <Text>{product?.price}</Text>
+            <Text style={styles.prodDescription}>{productSelected.description}</Text>
+            <Text>{productSelected.price}</Text>
             <Button onPress={handleBack} title='Go back'/>
         </View>
         </TouchableWithoutFeedback>

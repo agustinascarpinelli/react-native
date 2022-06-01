@@ -1,11 +1,12 @@
 
 import { StyleSheet, Text, View,ActivityIndicator } from 'react-native';
-import ProductScreen from './Screens/ProductScreen';
-import CategoriesScreen from './Screens/CategoriesScreen';
-import { useState } from 'react';
+
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useFonts} from 'expo-font';
 import MainNavigator from './Navigation';
+import { Provider } from 'react-redux';
+import store from './Store';
 
 
 
@@ -20,7 +21,9 @@ export default function App(){
   
       return (
         <SafeAreaView style={{ flex: 1 }}>
+          <Provider store={store}>
           <MainNavigator/>
+          </Provider>
         </SafeAreaView>
       )
 }

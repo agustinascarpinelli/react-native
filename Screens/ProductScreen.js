@@ -6,35 +6,36 @@ import { PRODUCTS } from "../Data/product"
 import React,{ useEffect,useState } from "react"
 import List from "../Components/List/Index"
 import { Entypo } from '@expo/vector-icons'; 
+import { useDispatch, useSelector } from "react-redux"
+import { setProductSelected } from "../Features/Products"
 
 
 const ProductScreen=({route, navigation})=>{
 const[input, setInput]=useState("")
 const handleErase=()=>{setInput("")}
 const [productsFiltered,setProductsFiltered]=useState([])
-const [initialProducts, setInitialProducts]=useState([])
+
 const {width,height}=useWindowDimensions()
 const [orientation,setOrientation]=useState("portrait")
 const {categoryID,categoryTitle}=route.params
+const dispatch=useDispatch()
+const {productsByCategory}=useSelector(state=>state.products.value)
 
 useEffect (()=>{
-    if (initialProducts.length!==0){
-        if (input ==="") setProductsFiltered(initialProducts)
-        else {const productfiltered=initialProducts.filter(product=>product.description.toLowerCase().includes(input.toLowerCase()))
+    if (productsByCategory.length!==0){
+        if (input ==="") setProductsFiltered(productsByCategory)
+        else {const productfiltered=productsByCategory.filter(product=>product.description.toLowerCase().includes(input.toLowerCase()))
         setProductsFiltered(productfiltered)}
-    }}, [input,initialProducts])
+    }}, [input,productsByCategory])
 
-useEffect (()=>{
-    const initialProduct=PRODUCTS.filter(product=>product.category===categoryID)
-    setInitialProducts(initialProduct)
-},[categoryID])  
+
 useEffect (()=>{
     setOrientation(height>width ? "portrait" : "landscape" )
 },[height,width])
 
 const handleDetailProduct=(product)=>{
+    dispatch(setProductSelected(product.id))
     navigation.navigate("Detail",{
-        productID:product.id,
         productTitle:product.description,
     })
 }

@@ -6,22 +6,28 @@ import { CATEGORIES } from "../Data/categories";
 import List from "../Components/List/Index";
 import React, { useState,useEffect } from "react";
 import { Entypo } from '@expo/vector-icons'; 
-
+import { useDispatch, useSelector } from "react-redux";
+import { setCategorySelected } from "../Features/Categories";
+import { setProductsByCategory } from "../Features/Products";
 
 
 const CategoriesScreen=({navigation})=>{
 const[input, setInput]=useState("")
 const handleErase=()=>{setInput("")}
-const [categoriesFiltered,setCategoriesFiltered]=useState(CATEGORIES)
+const [categoriesFiltered,setCategoriesFiltered]=useState()
 const {width,height}=useWindowDimensions()
 const [orientation,setOrientation]=useState("portrait")
-
-
+const {categories} =useSelector(state=>state.categories.value)
+const dispatch=useDispatch()
 useEffect (()=>{
-        if (input ==="") setCategoriesFiltered(CATEGORIES)
-        else {const categoryFiltered=CATEGORIES.filter(category=>category.category.toLowerCase().includes(input.toLowerCase()))
-        setCategoriesFiltered(categoryFiltered)}
+        if (input ==="") setCategoriesFiltered(categories)
+        else {
+            console.log("Se ejecuta el efecto");
+            const categoriesFiltered = categories.filter(category => category.category.toLowerCase().includes(input.toLowerCase()))
+            setCategoriesFiltered(categoriesFiltered)
+        }
     }, [input])
+
 
 
 useEffect (()=>{
@@ -29,6 +35,8 @@ useEffect (()=>{
 },[height,width])
 
 const handleSelectedCategory=(category)=>{
+    dispatch(setProductsByCategory(category.id))
+    dispatch(setCategorySelected(category.id))
  navigation.push ("Products",{
      categoryID:category.id,
      categoryTitle:category.category,
